@@ -1,0 +1,42 @@
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  msc-productor:
+    build: ./msc-productor
+    container_name: msc-productor
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    networks:
+      - app-network
+  
+  msc-consumer:
+    build: ./msc-consumer
+    container_name: msc-consumer
+    restart: always
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
