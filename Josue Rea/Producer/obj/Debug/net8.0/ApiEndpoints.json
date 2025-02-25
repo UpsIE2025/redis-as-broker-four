@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "PublishController",
+    "Method": "PublishMessage",
+    "RelativePath": "publish",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MessageRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
